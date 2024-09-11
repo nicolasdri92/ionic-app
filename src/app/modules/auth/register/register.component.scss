@@ -1,0 +1,20 @@
+.register-container {
+  position: absolute;
+  width: calc(100% - 32px);
+
+  h1 {
+    margin-bottom: 48px;
+  }
+
+  ion-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    background-color: #f4f5f8 !important;
+  }
+
+  ion-button {
+    margin-top: 20px;
+    margin-bottom: 60px;
+  }
+}
