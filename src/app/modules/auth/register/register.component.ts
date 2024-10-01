@@ -1,45 +1,87 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '@shared/services/auth.service';
+import { ToastService } from '@shared/services/toast.service';
 
 @Component({
-  selector: 'app-register',
+  selector: '.register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private _auth: AuthService,
+    private _toast: ToastService
+  ) {}
 
-  formGroup: FormGroup = new FormGroup({
+  registerForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
-    lastname: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
-    repassword: new FormControl('', Validators.required),
   });
 
   onSubmit(): void {
-    console.log(this.formGroup.value);
-    this.router.navigate(['/auth/login']);
+    this._auth
+      .register(this.email?.value, this.password?.value)
+      .then(() => {
+        this._auth.currentUser.subscribe(async (user: any) => {
+          if (user) {
+            await user.updateProfile({ displayName: this.name?.value });
+            await this._auth.updateCurrentUser(user);
+          }
+        });
+        this.router.navigate(['/auth/login']);
+      })
+      .catch(async (err: firebase.default.FirebaseError) => {
+        await this.presentToast(err.code);
+      });
   }
 
-  get name(): any {
-    return this.formGroup.get('name');
+  private async presentToast(code: string): Promise<void> {
+    let message: string;
+
+    switch (code) {
+      case 'auth/weak-password':
+        message = 'La contraseña debe tener al menos 6 caracteres.';
+        break;
+      case 'auth/email-already-in-use':
+        message = 'El correo electrónico ya está en uso en otra cuenta.';
+        break;
+      default:
+        message = 'Ocurrió un problema durante la autenticación.';
+        break;
+    }
+
+    let icon: string = 'alert-circle-outline';
+    let color: string = 'danger';
+
+    this._toast.create(message, icon, color);
   }
 
-  get lastname(): any {
-    return this.formGroup.get('lastname');
+  async signInWithCredential(): Promise<void> {
+    let message: string = 'Integración no implementada.';
+    let icon: string = 'warning-outline';
+    let color: string = 'warning';
+
+    this._toast.create(message, icon, color);
   }
 
-  get email(): any {
-    return this.formGroup.get('email');
+  get email(): AbstractControl<any, any> | null {
+    return this.registerForm.get('email');
   }
 
-  get password(): any {
-    return this.formGroup.get('password');
+  get name(): AbstractControl<any, any> | null {
+    return this.registerForm.get('name');
   }
 
-  get repassword(): any {
-    return this.formGroup.get('repassword');
+  get password(): AbstractControl<any, any> | null {
+    return this.registerForm.get('password');
   }
 }

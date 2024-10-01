@@ -1,37 +1,29 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, RouteReuseStrategy } from '@angular/router';
-
+import { RouteReuseStrategy } from '@angular/router';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { environment } from '@env/environment';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
-import { AuthComponent } from '@layout/auth/auth.component';
-import { MainComponent } from '@layout/main/main.component';
-import { LoginComponent } from '@modules/auth/login/login.component';
-import { RegisterComponent } from '@modules/auth/register/register.component';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AuthComponent,
-    MainComponent,
-    LoginComponent,
-    RegisterComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     BrowserModule,
-    CommonModule,
-    FormsModule,
     IonicModule.forRoot(),
-    ReactiveFormsModule,
-    RouterModule,
     AppRoutingModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
