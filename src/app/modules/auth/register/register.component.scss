@@ -5,8 +5,8 @@ ion-list {
 }
 
 ion-button {
-  margin-top: 2rem;
-  margin-bottom: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 ion-input.custom {
@@ -19,8 +19,8 @@ ion-input.custom {
 }
 
 ion-title {
-  margin-top: 3rem;
-  padding: 0 2rem;
+  margin-top: 2rem;
+  padding: 0 1rem;
 }
 
 ion-title.title-small {
@@ -54,3 +54,10 @@ ion-title.title-large {
 a {
   color: #222428;
 }
+
+.page-content {
+  margin-left: 0rem;
+  margin-right: 0rem;
+  padding: 0; 
+}
+

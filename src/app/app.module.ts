@@ -26,4 +26,10 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {}
+
+// StatusBar.setBackgroundColor({ color: '#cbcbcd' }); 
+// StatusBar.setStyle({ style: Style.Light}); 
+// StatusBar.show(); 
+// StatusBar.hide();

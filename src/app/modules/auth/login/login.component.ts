@@ -56,13 +56,13 @@ export class LoginComponent {
     this._toast.create(message, icon, color);
   }
 
-  async signInWithCredential(): Promise<void> {
+ async signInWithCredential(): Promise<void> {
     let message: string = 'Integración no implementada.';
     let icon: string = 'warning-outline';
     let color: string = 'warning';
 
     this._toast.create(message, icon, color);
-  }
+ }
 
   get email(): AbstractControl<any, any> | null {
     return this.loginForm.get('email');
@@ -71,4 +71,5 @@ export class LoginComponent {
   get password(): AbstractControl<any, any> | null {
     return this.loginForm.get('password');
   }
+
 }

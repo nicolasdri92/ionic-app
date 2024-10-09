@@ -1,22 +1,10 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title
-      class="ion-text-end"
-      color="medium"
-      size="small"
-      routerLink="/auth/login"
-      >Ingresar</ion-title
-    >
+    <ion-title class="page-content ion-text-center" size="large">Registrarse</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header class="ion-no-border" color="dark">
-    <ion-toolbar>
-      <ion-title size="large">Registrarse</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <div class="ion-padding">
     <form [formGroup]="registerForm">
       <ion-list lines="none">
@@ -75,6 +63,17 @@
       >
         Guardar
       </ion-button>
+
+      <ion-button
+        class="ion-text-capitalize"
+        color="medium"
+        expand="full"
+        fill="outline"
+        shape="round"
+        size="large"
+        routerLink="/auth/login">
+        Ingresar
+      </ion-button>
     </form>
 
     <div class="ion-text-center">
@@ -107,11 +106,20 @@
       </ion-button>
     </div>
 
-    <div class="ion-text-center ion-text-bottom">
+    <!-- <div class="ion-text-center ion-text-bottom">
       <ion-text color="dark">
-        Al registrarte aceptas nuestros <a href="">Términos de uso</a> y
+        Al registrarte aceptas nuestros 
+        <a href="">Términos de uso</a> y
+        <a href="">Política de privacidad</a>
+      </ion-text>
+    </div> -->
+  </div>
+
+  <div class="ion-text-bottom">
+      <ion-text color="dark">
+        Al registrarte aceptas nuestros 
+        <a href="">Términos de uso</a> y
         <a href="">Política de privacidad</a>
       </ion-text>
     </div>
-  </div>
 </ion-content>
