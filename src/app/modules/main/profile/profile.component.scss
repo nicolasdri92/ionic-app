@@ -19,3 +19,11 @@ ion-button {
     flex-direction: column;
     margin: 20px 0 40px;
 }
+
+input[type="file"] {
+  display: none;
+}
+
+img {
+  height: 150px;
+}
