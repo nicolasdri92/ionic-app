@@ -4,15 +4,6 @@
 
 export const environment = {
   production: false,
-  firebase: {
-    projectId: 'event-ionic-app-99c14',
-    appId: '1:453647551823:web:7e47ecf7ef26101d7e093a',
-    storageBucket: 'event-ionic-app-99c14.appspot.com',
-    apiKey: 'AIzaSyBjLcpgxulBTZjTFze2UZXZ15fJugXWKKM',
-    authDomain: 'event-ionic-app-99c14.firebaseapp.com',
-    messagingSenderId: '453647551823',
-    measurementId: 'G-YR58MXQ8DP',
-  },
 };
 
 /*

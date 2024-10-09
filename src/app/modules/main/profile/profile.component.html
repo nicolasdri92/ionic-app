@@ -1,17 +1,19 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title color="dark">Mi perfil</ion-title>
+  <ion-toolbar color="dark">
+    <ion-title color="light">Mi perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="ion-flex-center">
     <ion-avatar class="ion-text-center ion-align-self-center">
-      <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      <label for="src-file">
+        <img [src]="uploadedFileURL" (click)="setOpen(true)" />
+      </label>
     </ion-avatar>
-    <ion-text class="ion-text-center" (click)="openModal()"
-      >Editar perfil</ion-text
-    >
+    <ion-text class="ion-text-center" (click)="openModal()">
+      Editar perfil
+    </ion-text>
   </div>
 
   <ion-item-group>
@@ -44,3 +46,9 @@
     Cerrar sesión
   </ion-button>
 </ion-content>
+
+<ion-action-sheet
+  [isOpen]="isActionSheetOpen"
+  [buttons]="actionSheetButtons"
+  (didDismiss)="setOpen(false)"
+></ion-action-sheet>

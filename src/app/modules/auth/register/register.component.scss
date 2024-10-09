@@ -37,9 +37,9 @@ ion-title.title-large {
   display: flex;
   justify-content: space-between;
   ion-button {
-    --border-width: 0.1rem;
-    --padding-start: 2.5rem;
-    --padding-end: 2.5rem;
+    --border-width: 1px;
+    --padding-start: 2rem;
+    --padding-end: 2rem;
     --padding-top: 1rem;
     --padding-bottom: 1rem;
     font-size: 1rem;
@@ -48,7 +48,6 @@ ion-title.title-large {
 }
 
 .ion-text-bottom {
-  position: absolute;
   bottom: 3rem;
 }
 
