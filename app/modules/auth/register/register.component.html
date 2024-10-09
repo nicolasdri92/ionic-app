@@ -1,0 +1,117 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title
+      class="ion-text-end"
+      color="medium"
+      size="small"
+      routerLink="/auth/login"
+      >Ingresar</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header class="ion-no-border" color="dark">
+    <ion-toolbar>
+      <ion-title size="large">Registrarse</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <form [formGroup]="registerForm">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-input
+            class="custom"
+            color="medium"
+            errorText="Este campo es obligatorio."
+            formControlName="email"
+            label="Correo electrónico"
+            labelPlacement="floating"
+            type="email"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            class="custom"
+            color="medium"
+            errorText="Este campo es obligatorio."
+            formControlName="name"
+            label="Nombre"
+            labelPlacement="floating"
+            type="text"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            class="custom"
+            color="medium"
+            errorText="Este campo es obligatorio."
+            formControlName="password"
+            label="Contraseña"
+            labelPlacement="floating"
+            type="password"
+          >
+            <ion-input-password-toggle
+              *ngIf="password?.value"
+              color="dark"
+              slot="end"
+            ></ion-input-password-toggle>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button
+        class="ion-text-capitalize"
+        color="dark"
+        [disabled]="!registerForm.valid"
+        expand="full"
+        fill="solid"
+        shape="round"
+        size="large"
+        (click)="onSubmit()"
+      >
+        Guardar
+      </ion-button>
+    </form>
+
+    <div class="ion-text-center">
+      <ion-text> O ingresa con una cuenta social </ion-text>
+    </div>
+
+    <div class="ion-button-group">
+      <ion-button
+        class="ion-text-capitalize"
+        shape="round"
+        fill="outline"
+        size="large"
+        color="dark"
+        (click)="signInWithCredential()"
+      >
+        <ion-icon slot="start" name="logo-facebook"></ion-icon>
+        Facebook
+      </ion-button>
+
+      <ion-button
+        class="ion-text-capitalize"
+        shape="round"
+        fill="outline"
+        size="large"
+        color="dark"
+        (click)="signInWithCredential()"
+      >
+        <ion-icon slot="start" name="logo-twitter"></ion-icon>
+        Twitter
+      </ion-button>
+    </div>
+
+    <div class="ion-text-center ion-text-bottom">
+      <ion-text color="dark">
+        Al registrarte aceptas nuestros <a href="">Términos de uso</a> y
+        <a href="">Política de privacidad</a>
+      </ion-text>
+    </div>
+  </div>
+</ion-content>
