@@ -4,6 +4,8 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { AuthService } from '@shared/services/auth.service';
 import { ModalService } from '@shared/services/modal.service';
 import { ToastService } from '@shared/services/toast.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: '.profile',
@@ -12,11 +14,13 @@ import { ToastService } from '@shared/services/toast.service';
 })
 export class ProfileComponent {
   currentUser: firebase.default.UserInfo | null;
+  uploadedFileURL: string;
 
   constructor(
     private router: Router,
     private _modal: ModalService,
     private _auth: AuthService,
+    private storage: AngularFireStorage,
     private _toast: ToastService
   ) {}
 
@@ -24,7 +28,38 @@ export class ProfileComponent {
     this._auth.currentUser.subscribe((user: any) => {
       if (user) {
         this.currentUser = user?.providerData[0];
+        this.getFileURL();
       }
+    });
+  }
+
+  uploadFile(event: any): void {
+    const file = event.target.files[0];
+    const filePath = `uploads/${this.currentUser?.uid}`;
+    const task = this.storage.upload(filePath, file);
+
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.getFileURL();
+        })
+      )
+      .subscribe();
+  }
+
+  private getFileURL(): void {
+    const filePath = `uploads/${this.currentUser?.uid}`;
+    const task = this.storage.ref(filePath);
+
+    task.getDownloadURL().subscribe({
+      next: (res) => {
+        this.uploadedFileURL = res;
+      },
+      error: () => {
+        this.uploadedFileURL =
+          'https://firebasestorage.googleapis.com/v0/b/event-ionic-app-99c14.appspot.com/o/uploads%2Fdefault.png?alt=media';
+      },
     });
   }
 
