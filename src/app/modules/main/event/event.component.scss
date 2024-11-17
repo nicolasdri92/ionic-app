@@ -1,0 +1,19 @@
+.transparent-datetime-button {
+  --background: transparent;
+}
+
+.transparent-datetime-button::part(native) {
+  background-color: transparent !important;
+  box-shadow: none;
+  padding-inline-start: 0;
+}
+
+.coords {
+  margin-left: 8px;
+  font-size: 11px;
+}
+
+ion-list {
+  display: grid;
+  row-gap: 24px;
+}

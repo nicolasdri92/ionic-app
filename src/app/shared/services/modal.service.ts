@@ -1,8 +1,8 @@
-import { Injectable, Type } from '@angular/core';
-import { ModalController, ModalOptions } from '@ionic/angular';
+import { Injectable, Type } from "@angular/core";
+import { ModalController, ModalOptions } from "@ionic/angular";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ModalService {
   constructor(private modalController: ModalController) {}

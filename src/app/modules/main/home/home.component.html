@@ -5,5 +5,34 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-<app-empty></app-empty>  
+  <ng-content *ngFor="let item of items">
+    <ion-card (click)="setOpen(true, item)">
+      <ion-card-header>
+        <div class="card-group">
+          <ion-card-title>{{ item?.data.name }} </ion-card-title>
+          <ion-icon
+            slot="end"
+            name="trash-outline"
+            size="small"
+            color="danger"
+            (click)="removeItem(item?.id); $event.stopPropagation()"
+          ></ion-icon>
+        </div>
+
+        <ion-card-subtitle>{{
+          item?.data.datetime | date : "dd/MM/yyyy HH:mm"
+        }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content *ngIf="item?.data.description">
+        {{ item?.data.description }}
+      </ion-card-content>
+    </ion-card>
+  </ng-content>
 </ion-content>
+
+<ion-action-sheet
+  [isOpen]="isActionSheetOpen"
+  [buttons]="actionSheetButtons"
+  (didDismiss)="setOpen(false)"
+></ion-action-sheet>

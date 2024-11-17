@@ -9,6 +9,9 @@
     <ion-avatar class="ion-text-center ion-align-self-center">
       <label for="src-file">
         <img [src]="uploadedFileURL" (click)="setOpen(true)" />
+        <div class="input-img">
+          <ion-icon name="camera" size="small"></ion-icon>
+        </div>
       </label>
     </ion-avatar>
     <ion-text class="ion-text-center" (click)="openModal()">
