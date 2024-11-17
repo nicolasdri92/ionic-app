@@ -5,5 +5,104 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <app-empty></app-empty>
+  <form [formGroup]="eventForm">
+    <ion-list lines="none">
+      <!-- Nombre -->
+      <ion-item>
+        <ion-input
+          class="custom"
+          color="medium"
+          errorText="Este campo es obligatorio."
+          formControlName="name"
+          placeholder="Nombre del evento"
+          labelPlacement="stacked"
+          type="text"
+        ></ion-input>
+      </ion-item>
+
+      <!-- Fecha -->
+      <ion-item>
+        <ion-icon
+          aria-hidden="true"
+          color="dark"
+          name="calendar-outline"
+          slot="start"
+        ></ion-icon>
+        <ion-datetime-button
+          class="transparent-datetime-button"
+          datetime="datetime"
+        ></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="datetime"
+              color="dark"
+              presentation="date"
+              formControlName="datetime"
+              [formatOptions]="{
+        date: {
+          weekday: 'long',
+          month: 'long',
+          day: '2-digit',
+        }
+      }"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+
+      <!-- Ubicacion -->
+      <ion-item>
+        <ion-icon
+          aria-hidden="true"
+          color="dark"
+          name="location-outline"
+          slot="start"
+        ></ion-icon>
+        <ion-button
+          class="ion-text-capitalize"
+          color="primary"
+          expand="block"
+          fill="solid"
+          (click)="openModal()"
+        >
+          Ubicación
+        </ion-button>
+        <span *ngIf="location?.value" class="coords">
+          Lat: {{ location?.value.latitude }} <br />
+          Long: {{ location?.value.longitude }}
+        </span>
+      </ion-item>
+
+      <!-- Descripcion -->
+      <ion-item>
+        <ion-icon
+          aria-hidden="true"
+          color="dark"
+          name="list-outline"
+          slot="start"
+        ></ion-icon>
+        <ion-textarea
+          class="custom"
+          color="medium"
+          formControlName="description"
+          placeholder="Descripción"
+          labelPlacement="stacked"
+          type="text"
+        ></ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <ion-button
+      class="ion-text-capitalize"
+      color="dark"
+      [disabled]="!eventForm.valid"
+      expand="full"
+      fill="solid"
+      size="large"
+      (click)="onSubmit()"
+    >
+      Guardar
+    </ion-button>
+  </form>
 </ion-content>

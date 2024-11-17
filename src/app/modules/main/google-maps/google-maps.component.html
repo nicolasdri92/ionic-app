@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/main/event"
+        (click)="onClose()"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Google Maps</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <capacitor-google-map #map></capacitor-google-map>
+
+  <ion-button
+    class="save-button"
+    color="dark"
+    expand="full"
+    fill="solid"
+    size="large"
+    (click)="saveLocation()"
+  >
+    Guardar
+  </ion-button>
+</ion-content>
