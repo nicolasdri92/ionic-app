@@ -4,6 +4,7 @@ import { EventComponent } from '@modules/main/event/event.component';
 import { HomeComponent } from '@modules/main/home/home.component';
 import { ProfileComponent } from '@modules/main/profile/profile.component';
 import { MainPage } from './main.page';
+import { GoogleMapsComponent } from '@modules/main/google-maps/google-maps.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+      },
+      {
+        path: 'map',
+        component: GoogleMapsComponent,
       },
       {
         path: '**',

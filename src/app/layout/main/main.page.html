@@ -1,18 +1,27 @@
 <ion-router-outlet></ion-router-outlet>
-<ion-tabs>
+<ion-tabs (ionTabsWillChange)="onTabChange($event)">
   <ion-tab-bar slot="bottom">
     <ion-tab-button routerLink="/main/home">
-      <ion-icon color="dark" name="albums-outline"></ion-icon>
+      <ion-icon
+        color="dark"
+        [name]="activeTab === 'home' ? 'albums' : 'albums-outline'"
+      ></ion-icon>
       <ion-label color="dark">Agenda</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button routerLink="/main/event">
-      <ion-icon color="dark" name="add-circle-outline"></ion-icon>
+    <ion-tab-button routerLink="/main/event" (click)="onTabEventClick()">
+      <ion-icon
+        color="dark"
+        [name]="activeTab === 'event' ? 'add-circle' : 'add-circle-outline'"
+      ></ion-icon>
       <ion-label color="dark">Nuevo evento</ion-label>
     </ion-tab-button>
 
     <ion-tab-button routerLink="/main/profile">
-      <ion-icon color="dark" name="person"></ion-icon>
+      <ion-icon
+        color="dark"
+        [name]="activeTab === 'profile' ? 'person' : 'person-outline'"
+      ></ion-icon>
       <ion-label color="dark">Mi perfil</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
