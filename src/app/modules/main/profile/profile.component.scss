@@ -15,9 +15,9 @@ ion-button {
 }
 
 .ion-flex-center {
-    display: flex;
-    flex-direction: column;
-    margin: 20px 0 40px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0 40px;
 }
 
 input[type="file"] {
@@ -27,3 +27,65 @@ input[type="file"] {
 img {
   height: 150px;
 }
+
+ion-item-divider {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);  /* Línea sutil */
+  margin: 0;  /* Eliminar márgenes extras */
+}
+
+ion-item {
+  --min-height: 0;  /* Evitar que se asignen alturas innecesarias */
+  --padding-start: 0;
+  --padding-end: 0;
+  --lines: none;  /* Eliminar líneas de separación innecesarias */
+}
+
+.theme-selector,
+.language-selector {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;  /* Asegurar que ocupen todo el ancho disponible */
+}
+
+ion-select {
+  width: 100%;  /* Asegurar que el selector ocupe todo el ancho disponible */
+  --padding-start: 0; /* Eliminar padding adicional */
+  --padding-end: 0;
+  --min-width: 0;
+}
+
+ion-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 10px; /* Espacio entre el label y el selector */
+  width: 30%;  /* Asignar un ancho fijo para los labels y mantener consistencia */
+}
+
+ion-select-option {
+  font-size: 14px;
+}
+
+ion-select .select-icon {
+  display: none; /* Ocultar el icono predeterminado */
+}
+
+ion-item-group {
+  margin: 0; /* Eliminar el margen extra entre los grupos */
+}
+
+ion-content {
+  padding-left: 0;
+  padding-right: 0;
+  overflow-x: hidden;  /* Evitar el scroll horizontal */
+  display: flex;
+  flex-direction: column;
+  height: 100%;  /* Asegurar que el contenido ocupe toda la altura disponible */
+  justify-content: flex-start;  /* Asegurar que el contenido se alinee hacia arriba */
+}
+
+ion-item {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+

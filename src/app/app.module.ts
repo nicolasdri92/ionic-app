@@ -10,26 +10,44 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+// Importar servicios de traducción
+import { HttpClient} from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// Función para cargar las traducciones de los archivos JSON
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    // Inicialización de Firebase
     AngularFireModule.initializeApp(environment.firebase),
-    AppRoutingModule,
+
+    // Módulos principales de la aplicación
     BrowserModule,
+    AppRoutingModule,
     IonicModule.forRoot(),
-    ],
+
+    // Módulos de traducción
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+  ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+
+    // Proveedores de Firebase
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
-    provideStorage(() => getStorage()),
+    provideStorage(() => getStorage()), // Si no usas Storage, elimina esta línea
   ],
   bootstrap: [AppComponent],
 })
-
 export class AppModule {}
-
-// StatusBar.setBackgroundColor({ color: '#cbcbcd' }); 
-// StatusBar.setStyle({ style: Style.Light}); 
-// StatusBar.show(); 
-// StatusBar.hide();

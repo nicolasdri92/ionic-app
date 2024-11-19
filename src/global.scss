@@ -25,19 +25,23 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-// @import "@ionic/angular/css/palettes/dark.system.css";
-
-/* 
- * -----------------------------------------------------
- */
-
-
+/* Tema claro */
+body[color-theme='light'] {
+    --ion-background-color: #ffffff;
+    --ion-text-color: #000000;
+    --ion-toolbar-background: #f4f4f4;
+    --ion-toolbar-color: #000000;
+    --ion-item-background: #ffffff;
+    --ion-item-text-color: #000000;
+  }
+  
+  /* Tema oscuro */
+  body[color-theme='dark'] {
+    --ion-background-color: #121212;
+    --ion-text-color: #ffffff;
+    --ion-toolbar-background: #333333;
+    --ion-toolbar-color: #ffffff;
+    --ion-item-background: #333333;
+    --ion-item-text-color: #ffffff;
+  }
+  

@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar color="dark">
-    <ion-title color="light">Mi perfil</ion-title>
+  <ion-toolbar [color]="isDarkMode ? 'dark' : 'light'">
+    <ion-title [color]="isDarkMode ? 'light' : 'dark'">Mi perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,33 +17,52 @@
     </ion-text>
   </div>
 
-  <ion-item-group>
-    <ion-item-divider>
-      <ion-label>Mis Datos</ion-label>
-    </ion-item-divider>
-    <ion-item lines="none">
-      <ion-label>
-        <h2>Email</h2>
-        <p>{{ currentUser?.email }}</p>
-      </ion-label>
-    </ion-item>
+ <!-- Mis Datos -->
+<ion-item-group>
+  <ion-item lines="none">
+    <ion-label>
+      <h2>Email</h2>
+      <p>{{ currentUser?.email }}</p>
+    </ion-label>
+  </ion-item>
 
-    <ion-item lines="none">
-      <ion-label>
-        <h2>Nombre</h2>
-        <p>{{ currentUser?.displayName }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-item-group>
+  <ion-item lines="none">
+    <ion-label>
+      <h2>Nombre</h2>
+      <p>{{ currentUser?.displayName }}</p>
+    </ion-label>
+  </ion-item>
+</ion-item-group>
 
-  <ion-button
-    class="ion-text-capitalize"
-    color="dark"
-    expand="full"
-    fill="solid"
-    size="large"
-    (click)="logout()"
-  >
-    Cerrar sesión
-  </ion-button>
+<!-- Preferencias -->
+<ion-item-group>
+  <ion-item lines="none">
+    <ion-label class="selector-label">Modo</ion-label>
+    <ion-select (ionChange)="setTheme($event.target.value)" class="full-width-select">
+      <ion-select-option value="light">Claro</ion-select-option>
+      <ion-select-option value="dark">Oscuro</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Selector de Idioma -->
+  <ion-item lines="none">
+    <ion-label class="selector-label">Idioma</ion-label>
+    <ion-select (ionChange)="changeLanguage($event.target.value)" class="full-width-select">
+      <ion-select-option value="es">Español</ion-select-option>
+      <ion-select-option value="en">Inglés</ion-select-option>
+      <ion-select-option value="pt">Portuges</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-item-group>
+
+<ion-button
+class="ion-text-capitalize"
+color="dark"
+expand="full"
+fill="solid"
+size="large"
+(click)="logout()"
+>
+Cerrar sesión
+</ion-button>
 </ion-content>
