@@ -12,6 +12,8 @@
             android:value="AIzaSyBTPk0Omf-ZoncHbBxHlL91yaWz9B8LXGs"
         />
 
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBTPk0Omf-ZoncHbBxHlL91yaWz9B8LXGs"/>
+
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:name=".MainActivity"

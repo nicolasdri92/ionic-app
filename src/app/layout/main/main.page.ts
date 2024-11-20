@@ -10,4 +10,8 @@ export class MainPage {
   onTabChange(event: any) {
     this.activeTab = event.tab;
   }
+
+  onTabEventClick() {
+    localStorage.removeItem("eventItem");
+  }
 }

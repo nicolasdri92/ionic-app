@@ -1,33 +1,26 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { AfterViewInit, Component, ElementRef, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 import { Geolocation } from "@capacitor/geolocation";
 import { GoogleMap } from "@capacitor/google-maps";
 import { environment } from "@env/environment";
 import { ToastController } from "@ionic/angular";
-import { ModalService } from "@shared/services/modal.service";
 
 @Component({
   selector: "app-google-maps",
   templateUrl: "./google-maps.component.html",
   styleUrls: ["./google-maps.component.scss"],
 })
-export class GoogleMapsComponent implements OnInit, AfterViewInit {
+export class GoogleMapsComponent implements AfterViewInit {
   @ViewChild("map", { static: true }) mapRef: ElementRef<HTMLElement>;
+
   map: GoogleMap | null = null;
   clickedCoords: { latitude: number; longitude: number } | null = null;
   marker: string | null = null;
 
   constructor(
-    private toastController: ToastController,
-    private _modal: ModalService
+    private router: Router,
+    private toastController: ToastController
   ) {}
-
-  ngOnInit() {}
 
   ngAfterViewInit(): void {
     this.initGoogleMaps();
@@ -136,11 +129,12 @@ export class GoogleMapsComponent implements OnInit, AfterViewInit {
 
   saveLocation() {
     if (this.marker) {
-      this._modal.dismiss(this.clickedCoords);
+      localStorage.setItem("coords", JSON.stringify(this.clickedCoords));
+      this.onClose();
     }
   }
 
   onClose() {
-    this._modal.dismiss();
+    this.router.navigate(["/main/event"]);
   }
 }

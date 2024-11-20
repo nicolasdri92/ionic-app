@@ -6,8 +6,6 @@ import {
   AbstractControl,
 } from "@angular/forms";
 import { Router } from "@angular/router";
-import { ModalService } from "@shared/services/modal.service";
-import { GoogleMapsComponent } from "../google-maps/google-maps.component";
 import { DatabaseService } from "@shared/services/database.service";
 import { ToastController } from "@ionic/angular";
 import { AuthService } from "@shared/services/auth.service";
@@ -29,7 +27,6 @@ export class EventComponent {
   constructor(
     private router: Router,
     private toastController: ToastController,
-    private _modal: ModalService,
     private _auth: AuthService,
     private _db: DatabaseService
   ) {}
@@ -40,7 +37,7 @@ export class EventComponent {
       const JSONParseItem = JSON.parse(item);
       this.loadItemData(JSONParseItem);
       this.userId = JSONParseItem.id;
-      localStorage.removeItem("eventItem");
+      
     } else {
       this.eventForm.reset({
         name: "",
@@ -49,16 +46,11 @@ export class EventComponent {
         description: "",
       });
     }
-  }
-
-  ionViewWillLeave() {
-
-    const nodeList = document.querySelectorAll('._gmaps_cdv_');
-
-    for (let k = 0; k < nodeList.length; ++k) {
-        nodeList.item(k).classList.remove('_gmaps_cdv_');
+    const coords = localStorage.getItem("coords");
+    if (coords) {
+      this.location?.setValue(JSON.parse(coords));
+      localStorage.removeItem("coords");
     }
-
   }
 
   loadItemData(item: any): void {
@@ -103,11 +95,8 @@ export class EventComponent {
     });
   }
 
-  async openModal(): Promise<void> {
-    const modal = await this._modal.create(GoogleMapsComponent);
-    const { data } = await modal.onWillDismiss();
-
-    this.location?.setValue(data);
+  openMap(): any {
+    this.router.navigate(["/main/map"]);
   }
 
   async presentToast(message: string, color: string) {
