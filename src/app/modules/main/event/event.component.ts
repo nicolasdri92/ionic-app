@@ -51,6 +51,16 @@ export class EventComponent {
     }
   }
 
+  ionViewWillLeave() {
+
+    const nodeList = document.querySelectorAll('._gmaps_cdv_');
+
+    for (let k = 0; k < nodeList.length; ++k) {
+        nodeList.item(k).classList.remove('_gmaps_cdv_');
+    }
+
+  }
+
   loadItemData(item: any): void {
     this.eventForm.setValue({
       name: item.data.name || "",
